@@ -1,0 +1,72 @@
+server:
+  tomcat:
+    basedir: D:\
+    accesslog:
+      prefix: access
+      file-date-format: .yyyy-MM-dd
+      suffix: .log
+      enabled: true
+  error:
+    include-message: always
+    include-binding-errors: always
+
+security:
+  jwt:
+    token:
+      secret: secret
+      expired: 3000000
+
+spring:
+  datasource:
+    password: 3004
+    url: jdbc:postgresql://localhost:5432/employee_service
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  jackson:
+    serialization:
+        FAIL_ON_EMPTY_BEANS: false
+
+  redis:
+    cluster:
+      nodes: <Elasticache Configuration endpoint>
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
+      provider: org.ehcache.jsr107.EhcacheCachingProvider
+
+  mail:
+    host: localhost
+    port: 1025
+    username: hello
+    password: hello
+
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: "*"
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+
+  flyway:
+    check-location: false
+    locations:
+    baseline-on-migrate: true
+    validate-on-migrate: false
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
